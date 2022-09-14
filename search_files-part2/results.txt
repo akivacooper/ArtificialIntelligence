@@ -1,0 +1,21 @@
+hdistance1
+Average pushes:  41253.59
+Average pops:  19551.75
+Average length:  15.43
+
+hdistance2
+Average pushes:  4881.21
+Average pops:  2457.19
+Average length:  16.12
+
+hdistance1*
+Average pushes:  17917.82
+Average pops:  8455.49
+Average length:  17.43
+Analysis: Runtime is better, optimality is worse
+
+hdistance2*
+Average pushes:  1675.09
+Average pops:  847.27
+Average length:  17.5
+Analysis: Runtime is better, optimality is worse

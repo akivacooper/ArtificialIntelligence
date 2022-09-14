@@ -1,0 +1,12 @@
+search(2)
+Average depth:  1.75
+Average number pushed:  6.88
+Average number popped:  6.33
+
+search(3)
+Average depth:  5.56
+Average number pushed:  716.19
+Average number popped:  411.43
+
+search(4)
+Did not terminate (after running for 12+ hours)
