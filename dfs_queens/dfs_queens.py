@@ -7,8 +7,9 @@
 import random
 import sys
 
-size = 4
+size = 0
 queen_array = []
+queen_array_mirror = [[]]
 
 
 def place_n_queens():
@@ -53,7 +54,7 @@ def backtracking_solution():
             number_of_iterations += 1
             number_of_moves += 1
 
-            if col_is_safe(row, column):
+            if spot_is_safe(row, column):
                 place_in_next_col(column)
                 row += 1
                 column = 0
@@ -73,7 +74,6 @@ def backtracking_solution():
             # I couldn't find a solution so I now backtrack
             prev_queen_position = remove_in_current_row()
             if prev_queen_position == -1:  # I backtracked past column 1
-                display()
                 return False, number_of_iterations, number_of_moves
 
             # try previous row again
@@ -92,7 +92,7 @@ def heuristic_solution():
     while not solution_found:
 
         number_iterations += 1
-        #print("iteration: " + str(number_iterations))
+        # print("iteration: " + str(number_iterations))
 
         place_n_queens()
         number_moves += size
@@ -101,9 +101,9 @@ def heuristic_solution():
             solution_found = True
             continue
 
-        for counter in range(0, size):
+        for counter in range(0, 10):
 
-            #print("assessment: " + str(counter))
+            # print("assessment: " + str(counter))
 
             rated_queens_map = rate_queens()
             rated_queens_rows = list(rated_queens_map)
@@ -117,10 +117,7 @@ def heuristic_solution():
 
     return True, number_iterations, number_moves
 
-
-
-
-    #for next_queen in enumerate(rate_queens()):
+    # for next_queen in enumerate(rate_queens()):
 
     # 1. Genearte a random board
     # 2.
@@ -130,6 +127,64 @@ def heuristic_solution():
     # try randomly restarting only some, like the two biggest problems
     # 10 for 8, 100 for 100
 
+
+def forward_solution():
+    # make a mirror image of the board, with only the correct possibilities within it
+    # you still do dfs
+    # what you could do is, think of them as pawns for conflicts, but when deciiding where to put down the queens, think of them as queens
+
+    global queen_array_mirror
+
+    queen_array.clear()
+    queen_array_mirror.clear()
+    number_of_moves = 0  # where do I change this so that it counts the number of Queen moves?
+    number_of_iterations = 0  # going through the process of searching through the board and making a move
+    row = 0
+    column = 0
+
+    queen_array_mirror = [[0 for i in range(size)] for j in range(size)]
+
+    # iterate over rows of board
+    while True:
+
+        # place queen in next row
+        while column < size:
+
+            number_of_iterations += 1
+
+            if spot_is_safe_forward(row, column):
+                place_in_spot_forward(row, column)
+                number_of_moves += 1
+                row += 1
+                column = 0
+                break
+            else:
+                column += 1
+
+        # if I could not find an open column or if board is full
+        if column == size or row == size:
+            number_of_iterations += 1
+            number_of_moves += 1
+
+            # if board is full, we have a solution
+            if row == size:
+
+                return True, number_of_iterations, number_of_moves
+
+            # I couldn't find a solution so I now backtrack
+            prev_queen_position = remove_in_current_row_forward()
+            if prev_queen_position == -1:  # I backtracked past column 1
+
+                return False, number_of_iterations, number_of_moves
+
+            # try previous row again
+            row -= 1
+
+            # start checking at column = (1 + value of column in previous row)
+            column = 1 + prev_queen_position
+
+
+# def forward_heuristic_solution():
 
 def rate_queens():
     rated_queens = {0: []}
@@ -167,9 +222,69 @@ def place_in_next_col(column):
     queen_array.append(column)
 
 
+def place_in_spot_forward(row, col):
+    queen_array.append(col)
+
+    for next_row in range(size):
+        for next_col in range(size):
+
+            if (next_row == row) & (next_col == col):
+                queen_array_mirror[next_row][next_col] += 1
+                continue
+
+            if next_col == col:
+                queen_array_mirror[next_row][next_col] += 1
+
+            if next_row == row:
+                queen_array_mirror[next_row][next_col] += 1
+                continue
+
+            if next_col - next_row == col - row:
+                queen_array_mirror[next_row][next_col] += 1
+
+            if (size - next_col) - next_row == (size - col) - row:
+                queen_array_mirror[next_row][next_col] += 1
+
+
+
 def remove_in_current_row():
     if len(queen_array) > 0:
         return queen_array.pop()
+    return -1
+
+
+def remove_in_current_row_forward():
+
+
+    row = len(queen_array) - 1
+
+    if row >= 0:
+        col = queen_array.pop()
+
+
+        for next_row in range(size):
+            for next_col in range(size):
+
+
+                if(next_row == row) & (next_col == col):
+                    queen_array_mirror[next_row][next_col] -= 1
+                    continue
+
+                if next_col == col:
+                    queen_array_mirror[next_row][next_col] -= 1
+
+                if next_row == row:
+                    queen_array_mirror[next_row][next_col] -= 1
+
+                if next_col - next_row == col - row:
+                    queen_array_mirror[next_row][next_col] -= 1
+
+                if (size - next_col) - next_row == (size - col) - row:
+                    queen_array_mirror[next_row][next_col] -= 1
+
+
+        return col
+
     return -1
 
 
@@ -190,7 +305,7 @@ def does_conflict(row_x, col_x, row_y, col_y):
     return False
 
 
-def col_is_safe(row, column):
+def spot_is_safe(row, column):
     # check column
     for next_queen_col in queen_array:
         if column == next_queen_col:
@@ -205,6 +320,12 @@ def col_is_safe(row, column):
     for next_queen_row, next_queen_col in enumerate(queen_array):
         if (size - next_queen_col) - next_queen_row == (size - column) - row:
             return False
+    return True
+
+
+def spot_is_safe_forward(row, col):
+    if queen_array_mirror[row][col] != 0:
+        return False
     return True
 
 
@@ -227,6 +348,13 @@ def display():
                 print(' .', end=' ')
         print()
 
+def display_forward():
+    for row in range(size):
+        for col in range(size):
+            print(" " + str(queen_array_mirror[row][col]), end=" ")
+        print()
+    print()
+
 
 def run():
     global size
@@ -240,7 +368,7 @@ def run():
     high_moves = 0
     low_moves = sys.maxsize
 
-    for i in range(0, 100):
+    for i in range(100):
 
         print("of 100: " + str(i))
 

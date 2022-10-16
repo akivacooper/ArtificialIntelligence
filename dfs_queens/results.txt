@@ -12,7 +12,6 @@ British Museum:
     high moves: 2476
     low moves: 4
 
-
 Backtracking:
     total iterations: 3100
     mean iterations: 31.0
@@ -25,6 +24,7 @@ Backtracking:
     low moves: 31
 
 Heuristic Repair:
+  Description: Restart after 'size' times
     total iterations: 4322
     mean iterations: 43.22
     high iterations: 212
@@ -35,7 +35,70 @@ Heuristic Repair:
     high moves: 1693
     low moves: 4
 
+Heuristic Repair:
+  Description: Restart after 10 times
+    total iterations: 4861
+    mean iterations: 48.61
+    high iterations: 214
+    low iterations: 1
+
+    total moves: 67116
+    mean moves: 671.16
+    high moves: 2986
+    low moves: 4
+
+Forward Checking:
+  Description: Backtracking and Forward
+
+    total iterations: 3100
+    mean iterations: 31.0
+    high iterations: 31
+    low iterations: 31
+
+    total moves: 1300
+    mean moves: 13.0
+    high moves: 13
+    low moves: 13
+
 ====================================================
 BOARD OF 8
 
+Heuristic Repair:
+  Restart after 'size' times:
+    total iterations: 1169829
+    mean iterations: 11698.29
+    high iterations: 54746
+    low iterations: 37
 
+    total moves: 18716627
+    mean moves: 187166.27
+    high moves: 875928
+    low moves: 586
+
+Heuristic Repair:
+  Description: Restart after 10 times
+    total iterations: 988790
+    mean iterations: 9887.9
+    high iterations: 65516
+    low iterations: 86
+
+    total moves: 17797400
+    mean moves: 177974.0
+    high moves: 1179279
+    low moves: 1539
+
+Forward Checking:
+  Description: Backtracking and Forward
+
+    total iterations: 98200
+    mean iterations: 982.0
+    high iterations: 982
+    low iterations: 982
+
+    total moves: 21900
+    mean moves: 219.0
+    high moves: 219
+    low moves: 219
+
+====================================================
+BOARD OF 100 (don't run 100 times tho, make more reasonable, both stochastic and forward should work)
