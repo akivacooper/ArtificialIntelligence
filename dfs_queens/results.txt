@@ -1,0 +1,41 @@
+====================================================
+BOARD OF 4
+
+British Museum:
+    total iterations: 11756
+    mean iterations: 117.56
+    high iterations: 619
+    low iterations: 1
+
+    total moves: 47024
+    mean moves: 470.24
+    high moves: 2476
+    low moves: 4
+
+
+Backtracking:
+    total iterations: 3100
+    mean iterations: 31.0
+    high iterations: 31
+    low iterations: 31
+
+    total moves: 3100
+    mean moves: 31.0
+    high moves: 31
+    low moves: 31
+
+Heuristic Repair:
+    total iterations: 4322
+    mean iterations: 43.22
+    high iterations: 212
+    low iterations: 1
+
+    total moves: 34244
+    mean moves: 342.44
+    high moves: 1693
+    low moves: 4
+
+====================================================
+BOARD OF 8
+
+
