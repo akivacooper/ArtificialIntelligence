@@ -101,7 +101,7 @@ def heuristic_solution():
             solution_found = True
             continue
 
-        for counter in range(0, 10):
+        for counter in range(10):
 
             # print("assessment: " + str(counter))
 
@@ -126,6 +126,86 @@ def heuristic_solution():
     # 3. Move until both: false solution AND at local max OR TRUE OR Ran a couple times
     # try randomly restarting only some, like the two biggest problems
     # 10 for 8, 100 for 100
+
+
+# creates new board after a given number of iterations, or a local max
+def heuristic_local_solution():
+    queen_array.clear()
+    number_iterations = 0
+    number_moves = 0
+    solution_found = False
+
+    while not solution_found:
+
+        number_iterations += 1
+        # print("iteration: " + str(number_iterations))
+
+        place_n_queens()
+        number_moves += size
+
+        if verify_solution():
+            solution_found = True
+            continue
+
+        for counter in range(size):
+
+            # print("assessment: " + str(counter))
+
+            rated_queens_map = rate_queens()
+
+            if at_local_max(rated_queens_map):
+                break
+
+            rated_queens_rows = list(rated_queens_map)
+            worst_queen_row = rated_queens_rows[0]
+            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[2]
+            number_moves += 1
+
+            if verify_solution():
+                solution_found = True
+                break
+
+
+    return True, number_iterations, number_moves
+
+
+def heuristic_only_local_solution():
+    queen_array.clear()
+    number_iterations = 0
+    number_moves = 0
+    solution_found = False
+
+    while not solution_found:
+
+        number_iterations += 1
+        # print("iteration: " + str(number_iterations))
+
+        place_n_queens()
+        number_moves += size
+
+        if verify_solution():
+            solution_found = True
+            continue
+
+        while True:
+
+            # print("assessment: " + str(counter))
+
+            rated_queens_map = rate_queens()
+
+            if at_local_max(rated_queens_map):
+                break
+
+            rated_queens_rows = list(rated_queens_map)
+            worst_queen_row = rated_queens_rows[0]
+            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[2]
+            number_moves += 1
+
+            if verify_solution():
+                solution_found = True
+                break
+
+    return True, number_iterations, number_moves
 
 
 def forward_solution():
@@ -168,7 +248,6 @@ def forward_solution():
 
             # if board is full, we have a solution
             if row == size:
-
                 return True, number_of_iterations, number_of_moves
 
             # I couldn't find a solution so I now backtrack
@@ -218,6 +297,17 @@ def rate_queens():
     return rated_queens_sorted_reversed
 
 
+def at_local_max(rated_queens):
+    for next_row in rated_queens:
+
+        next_queen_values = rated_queens.get(next_row)
+
+        if next_queen_values[0] > next_queen_values[2]:
+            return False
+
+    return True
+
+
 def place_in_next_col(column):
     queen_array.append(column)
 
@@ -246,7 +336,6 @@ def place_in_spot_forward(row, col):
                 queen_array_mirror[next_row][next_col] += 1
 
 
-
 def remove_in_current_row():
     if len(queen_array) > 0:
         return queen_array.pop()
@@ -254,19 +343,15 @@ def remove_in_current_row():
 
 
 def remove_in_current_row_forward():
-
-
     row = len(queen_array) - 1
 
     if row >= 0:
         col = queen_array.pop()
 
-
         for next_row in range(size):
             for next_col in range(size):
 
-
-                if(next_row == row) & (next_col == col):
+                if (next_row == row) & (next_col == col):
                     queen_array_mirror[next_row][next_col] -= 1
                     continue
 
@@ -281,7 +366,6 @@ def remove_in_current_row_forward():
 
                 if (size - next_col) - next_row == (size - col) - row:
                     queen_array_mirror[next_row][next_col] -= 1
-
 
         return col
 
@@ -348,6 +432,7 @@ def display():
                 print(' .', end=' ')
         print()
 
+
 def display_forward():
     for row in range(size):
         for col in range(size):
@@ -375,7 +460,7 @@ def run():
         run_iterations = 0
         run_moves = 0
         solution = False
-        solution, run_iterations, run_moves = heuristic_solution()
+        solution, run_iterations, run_moves = heuristic_local_solution()
 
         total_iterations += run_iterations
         if run_iterations > high_iterations:

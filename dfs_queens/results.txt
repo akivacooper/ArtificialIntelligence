@@ -25,27 +25,55 @@ Backtracking:
 
 Heuristic Repair:
   Description: Restart after 'size' times
-    total iterations: 4322
-    mean iterations: 43.22
-    high iterations: 212
+    total iterations: 3601
+    mean iterations: 36.01
+    high iterations: 161
     low iterations: 1
 
-    total moves: 34244
-    mean moves: 342.44
-    high moves: 1693
+    total moves: 28472
+    mean moves: 284.72
+    high moves: 1285
+    low moves: 4
+
+
+Heuristic Repair:
+  Description: Restart after 'size' times | Restart at local max
+
+    total iterations: 4673
+    mean iterations: 46.73
+    high iterations: 174
+    low iterations: 1
+
+    total moves: 34506
+    mean moves: 345.06
+    high moves: 1294
     low moves: 4
 
 Heuristic Repair:
   Description: Restart after 10 times
-    total iterations: 4861
-    mean iterations: 48.61
-    high iterations: 214
+    total iterations: 4168
+    mean iterations: 41.68
+    high iterations: 144
     low iterations: 1
 
-    total moves: 67116
-    mean moves: 671.16
-    high moves: 2986
+    total moves: 57419
+    mean moves: 574.19
+    high moves: 2007
     low moves: 4
+
+Heuristic Repair:
+  Description: Restart after '10'times | Restart at local max
+
+    total iterations: 4401
+    mean iterations: 44.01
+    high iterations: 288
+    low iterations: 2
+
+    total moves: 53788
+    mean moves: 537.88
+    high moves: 3548
+    low moves: 10
+
 
 Forward Checking:
   Description: Backtracking and Forward
@@ -71,9 +99,22 @@ Heuristic Repair:
     low iterations: 37
 
     total moves: 18716627
-    mean moves: 187166.27
+    mean moves: 187,166.27
     high moves: 875928
     low moves: 586
+
+Heuristic Repair:
+  Restart after 'size' times | Restart at local max:
+
+    total iterations: 1073355
+    mean iterations: 10733.55
+    high iterations: 40591
+    low iterations: 26
+
+    total moves: 17079933
+    mean moves: 170,799.33
+    high moves: 645647
+    low moves: 410
 
 Heuristic Repair:
   Description: Restart after 10 times
@@ -83,9 +124,22 @@ Heuristic Repair:
     low iterations: 86
 
     total moves: 17797400
-    mean moves: 177974.0
+    mean moves: 177,974.0
     high moves: 1179279
     low moves: 1539
+
+Heuristic Repair:
+  Restart after '10' times | Restart at local max:
+
+    total iterations: 1060017
+    mean iterations: 10600.17
+    high iterations: 49440
+    low iterations: 68
+
+    total moves: 18959205
+    mean moves: 189,592.05
+    high moves: 884102
+    low moves: 1199
 
 Forward Checking:
   Description: Backtracking and Forward
