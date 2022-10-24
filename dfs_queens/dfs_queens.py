@@ -108,7 +108,7 @@ def heuristic_solution():
             rated_queens_map = rate_queens()
             rated_queens_rows = list(rated_queens_map)
             worst_queen_row = rated_queens_rows[0]
-            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[2]
+            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
             number_moves += 1
 
             if verify_solution():
@@ -147,7 +147,7 @@ def heuristic_local_solution():
             solution_found = True
             continue
 
-        for counter in range(size):
+        for counter in range(10):
 
             # print("assessment: " + str(counter))
 
@@ -158,7 +158,7 @@ def heuristic_local_solution():
 
             rated_queens_rows = list(rated_queens_map)
             worst_queen_row = rated_queens_rows[0]
-            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[2]
+            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
             number_moves += 1
 
             if verify_solution():
@@ -193,12 +193,13 @@ def heuristic_only_local_solution():
 
             rated_queens_map = rate_queens()
 
+            display()
+            print()
             if at_local_max(rated_queens_map):
                 break
 
-            rated_queens_rows = list(rated_queens_map)
-            worst_queen_row = rated_queens_rows[0]
-            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[2]
+            worst_queen_row = find_worst_queen(rated_queens_map)
+            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
             number_moves += 1
 
             if verify_solution():
@@ -282,12 +283,14 @@ def rate_queens():
                 if does_conflict(next_queen_row_x, next_col, next_queen_row_y, next_queen_col_y):
                     next_col_score += 1
 
+            if next_col == next_queen_col_x:
+                current_score = next_col_score
+                continue
+
+            #best_col_score must be the best column aside the current column
             if next_col_score < best_col_score:
                 best_col = next_col
                 best_col_score = next_col_score
-
-            if next_col == next_queen_col_x:
-                current_score = next_col_score
 
         rated_queens[next_queen_row_x] = [current_score, best_col, best_col_score]
 
@@ -296,13 +299,24 @@ def rate_queens():
 
     return rated_queens_sorted_reversed
 
+def find_worst_queen(rated_queens_map):
+
+    for next_row in rated_queens_map:
+
+        next_queen_values = rated_queens_map.get(next_row)
+
+        # by definition, the best column [2] must be a column other than the current
+        if next_queen_values[0] >= next_queen_values[2]:
+            return next_row
+
 
 def at_local_max(rated_queens):
     for next_row in rated_queens:
 
         next_queen_values = rated_queens.get(next_row)
 
-        if next_queen_values[0] > next_queen_values[2]:
+        #by definition, the best column [2] must be a column other than the current
+        if next_queen_values[0] >= next_queen_values[2]:
             return False
 
     return True
@@ -460,7 +474,7 @@ def run():
         run_iterations = 0
         run_moves = 0
         solution = False
-        solution, run_iterations, run_moves = heuristic_local_solution()
+        solution, run_iterations, run_moves = heuristic_only_local_solution()
 
         total_iterations += run_iterations
         if run_iterations > high_iterations:

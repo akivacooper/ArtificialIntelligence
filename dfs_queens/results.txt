@@ -25,54 +25,55 @@ Backtracking:
 
 Heuristic Repair:
   Description: Restart after 'size' times
-    total iterations: 3601
-    mean iterations: 36.01
-    high iterations: 161
+    total iterations: 662
+    mean iterations: 6.62
+    high iterations: 31
     low iterations: 1
 
-    total moves: 28472
-    mean moves: 284.72
-    high moves: 1285
+    total moves: 5050
+    mean moves: 50.5
+    high moves: 245
     low moves: 4
 
 
 Heuristic Repair:
   Description: Restart after 'size' times | Restart at local max
 
-    total iterations: 4673
-    mean iterations: 46.73
-    high iterations: 174
+    total iterations: 792
+    mean iterations: 7.92
+    high iterations: 31
     low iterations: 1
 
-    total moves: 34506
-    mean moves: 345.06
-    high moves: 1294
-    low moves: 4
+    total moves: 6101
+    mean moves: 61.01
+    high moves: 245
+    low moves: 5
+
 
 Heuristic Repair:
   Description: Restart after 10 times
-    total iterations: 4168
-    mean iterations: 41.68
-    high iterations: 144
+    total iterations: 705
+    mean iterations: 7.05
+    high iterations: 28
     low iterations: 1
 
-    total moves: 57419
-    mean moves: 574.19
-    high moves: 2007
+    total moves: 5373
+    mean moves: 53.73
+    high moves: 222
     low moves: 4
 
 Heuristic Repair:
   Description: Restart after '10'times | Restart at local max
 
-    total iterations: 4401
-    mean iterations: 44.01
-    high iterations: 288
-    low iterations: 2
+    total iterations: 660
+    mean iterations: 6.6
+    high iterations: 25
+    low iterations: 1
 
-    total moves: 53788
-    mean moves: 537.88
-    high moves: 3548
-    low moves: 10
+    total moves: 8391
+    mean moves: 83.91
+    high moves: 342
+    low moves: 5
 
 
 Forward Checking:
@@ -91,65 +92,85 @@ Forward Checking:
 ====================================================
 BOARD OF 8
 
+11,698.29
+187,166.27
+
+10,733.55
+170,799.33
+
+9,887.9
+177,974.0
+
+10,600.17
+189,592.05
+
+982.0
+219.0
+
 Heuristic Repair:
   Restart after 'size' times:
-    total iterations: 1169829
-    mean iterations: 11698.29
-    high iterations: 54746
-    low iterations: 37
 
-    total moves: 18716627
-    mean moves: 187,166.27
-    high moves: 875928
-    low moves: 586
+    total iterations: 566
+    mean iterations: 5.66
+    high iterations: 25
+    low iterations: 1
+
+    total moves: 8745
+    mean moves: 87.45
+    high moves: 397
+    low moves: 11
 
 Heuristic Repair:
   Restart after 'size' times | Restart at local max:
 
-    total iterations: 1073355
-    mean iterations: 10733.55
-    high iterations: 40591
-    low iterations: 26
+    total iterations: 597
+    mean iterations: 5.97
+    high iterations: 27
+    low iterations: 1
 
-    total moves: 17079933
-    mean moves: 170,799.33
-    high moves: 645647
-    low moves: 410
+    total moves: 9225
+    mean moves: 92.25
+    high moves: 430
+    low moves: 9
+
 
 Heuristic Repair:
   Description: Restart after 10 times
-    total iterations: 988790
-    mean iterations: 9887.9
-    high iterations: 65516
-    low iterations: 86
+    total iterations: 606
+    mean iterations: 6.06
+    high iterations: 30
+    low iterations: 1
 
-    total moves: 17797400
-    mean moves: 177,974.0
-    high moves: 1179279
-    low moves: 1539
+    total moves: 10412
+    mean moves: 104.12
+    high moves: 535
+    low moves: 11
 
 Heuristic Repair:
   Restart after '10' times | Restart at local max:
 
-    total iterations: 1060017
-    mean iterations: 10600.17
-    high iterations: 49440
-    low iterations: 68
+    total iterations: 567
+    mean iterations: 5.67
+    high iterations: 48
+    low iterations: 1
 
-    total moves: 18959205
-    mean moves: 189,592.05
-    high moves: 884102
-    low moves: 1199
+    total moves: 9684
+    mean moves: 96.84
+    high moves: 856
+    low moves: 10
+
+Heuristic Repair:
+  Restart at local max:
 
 Forward Checking:
   Description: Backtracking and Forward
 
-    total iterations: 98200
+    total iterations: 98,200
     mean iterations: 982.0
     high iterations: 982
     low iterations: 982
 
-    total moves: 21900
+    total moves: 21,900
     mean moves: 219.0
     high moves: 219
     low moves: 219
