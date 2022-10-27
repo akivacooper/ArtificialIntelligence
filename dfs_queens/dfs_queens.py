@@ -101,21 +101,25 @@ def heuristic_solution():
             solution_found = True
             continue
 
-        for counter in range(10):
+        for x in range(10):
 
             # print("assessment: " + str(counter))
-
             rated_queens_map = rate_queens()
             rated_queens_rows = list(rated_queens_map)
-            worst_queen_row = rated_queens_rows[0]
-            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
-            number_moves += 1
 
-            if verify_solution():
-                solution_found = True
-                break
+
+            for y in range(1):
+                worst_queen_row = rated_queens_rows[y]
+                queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
+                number_moves += 1
+
+                if verify_solution():
+                    solution_found = True
+                    break
 
     return True, number_iterations, number_moves
+
+
 
     # for next_queen in enumerate(rate_queens()):
 
@@ -152,18 +156,18 @@ def heuristic_local_solution():
             # print("assessment: " + str(counter))
 
             rated_queens_map = rate_queens()
-
             if at_local_max(rated_queens_map):
                 break
-
             rated_queens_rows = list(rated_queens_map)
-            worst_queen_row = rated_queens_rows[0]
-            queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
-            number_moves += 1
 
-            if verify_solution():
-                solution_found = True
-                break
+            for y in range(1):
+                worst_queen_row = rated_queens_rows[y]
+                queen_array[worst_queen_row] = rated_queens_map.get(worst_queen_row)[1]
+                number_moves += 1
+
+                if verify_solution():
+                    solution_found = True
+                    break
 
 
     return True, number_iterations, number_moves
@@ -474,7 +478,7 @@ def run():
         run_iterations = 0
         run_moves = 0
         solution = False
-        solution, run_iterations, run_moves = heuristic_only_local_solution()
+        solution, run_iterations, run_moves = forward_solution()
 
         total_iterations += run_iterations
         if run_iterations > high_iterations:

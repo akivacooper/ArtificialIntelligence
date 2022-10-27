@@ -1,6 +1,26 @@
 ====================================================
 BOARD OF 4
 
+SUMMARY (mean iterations):
+1. Heuristic Repair:(after 'size' times)(2): 2.99
+2. Heuristic Repair (after 'size')(1): 6.62
+3. Heuristic Repair (after 10 or local)(1): 6.6
+4. Heuristic Repair (after 10)(1): 7.05
+5. Heuristic Repair (after 'size' or local)(1): 7.92
+6. Backtracking: 31.0
+7. Forward: 31
+8. British Museum: 117.56
+
+SUMMARY (mean moves):
+1. Forward: 13
+2. Backtracking: 31.0
+3. Heuristic Repair:(after 'size' times)(2): 35.14
+4. Heuristic Repair (after 'size')(1): 50.5
+5. Heuristic Repair (after 10)(1): 53.73
+6. Heuristic Repair (after 'size' or local)(1): 61.01
+7. Heuristic Repair (after 10 or local)(1): 83.91
+8. British Museum: 470.24
+
 British Museum:
     total iterations: 11756
     mean iterations: 117.56
@@ -24,7 +44,7 @@ Backtracking:
     low moves: 31
 
 Heuristic Repair:
-  Description: Restart after 'size' times
+  Description: (Restart after 'size' times)(Move 1 queen)
     total iterations: 662
     mean iterations: 6.62
     high iterations: 31
@@ -37,7 +57,7 @@ Heuristic Repair:
 
 
 Heuristic Repair:
-  Description: Restart after 'size' times | Restart at local max
+  Description: (Restart after 'size' times | Restart at local max)(Move 1 queen)
 
     total iterations: 792
     mean iterations: 7.92
@@ -51,7 +71,7 @@ Heuristic Repair:
 
 
 Heuristic Repair:
-  Description: Restart after 10 times
+  Description: (Restart after 10 times)(Move 1 queen)
     total iterations: 705
     mean iterations: 7.05
     high iterations: 28
@@ -62,8 +82,8 @@ Heuristic Repair:
     high moves: 222
     low moves: 4
 
-Heuristic Repair:
-  Description: Restart after '10'times | Restart at local max
+Heuristic Repair :
+  Description: (Restart after '10'times | Restart at local max)(Move 1 queen)
 
     total iterations: 660
     mean iterations: 6.6
@@ -74,6 +94,18 @@ Heuristic Repair:
     mean moves: 83.91
     high moves: 342
     low moves: 5
+
+Heuristic Repair:
+  Description (Restart after 'size' times)(Move 2 queens & Check each move)
+    total iterations: 299
+    mean iterations: 2.99
+    high iterations: 9
+    low iterations: 1
+
+    total moves: 3514
+    mean moves: 35.14
+    high moves: 108
+    low moves: 4
 
 
 Forward Checking:
@@ -92,23 +124,26 @@ Forward Checking:
 ====================================================
 BOARD OF 8
 
-11,698.29
-187,166.27
+SUMMARY (mean iterations):
+1. Heuristic Repair (after 'size')(1): 5.66
+2. Heuristic Repair (after 10 and local)(1): 5.67
+3. Heuristic Repair (after 'size' and local)(1): 5.97
+4. Heuristic Repair (after 'size' times)(2): 5.97
+5. Heuristic Repair (after 10)(1): 6.06
+6. Forward Checking: 982.0
+7. Heuristic Repair (local)(1):
 
-10,733.55
-170,799.33
-
-9,887.9
-177,974.0
-
-10,600.17
-189,592.05
-
-982.0
-219.0
+SUMMARY (mean moves):
+1. Heuristic Repair (after 'size')(1): 87.45
+2. Heuristic Repair (after 'size' and local)(1): 92.25
+3. Heuristic Repair (after 10 and local)(1): 96.84
+4. Heuristic Repair (after 10)(1): 104.12
+5. Heuristic Repair (after 'size' times)(2): 142.52
+6. Forward Checking: 219.0
+7. Heuristic Repair (after local)(1):
 
 Heuristic Repair:
-  Restart after 'size' times:
+  Description: (Restart after 'size' times)(Move 1 queen)
 
     total iterations: 566
     mean iterations: 5.66
@@ -121,7 +156,7 @@ Heuristic Repair:
     low moves: 11
 
 Heuristic Repair:
-  Restart after 'size' times | Restart at local max:
+  Description: (Restart after 'size' times | Restart at local max)(Move 1 queen)
 
     total iterations: 597
     mean iterations: 5.97
@@ -135,7 +170,7 @@ Heuristic Repair:
 
 
 Heuristic Repair:
-  Description: Restart after 10 times
+  Description: (Restart after 10 times)(Move 1 queen)
     total iterations: 606
     mean iterations: 6.06
     high iterations: 30
@@ -147,7 +182,7 @@ Heuristic Repair:
     low moves: 11
 
 Heuristic Repair:
-  Restart after '10' times | Restart at local max:
+  Description: (Restart after '10' times | Restart at local max)(Move 1 queen)
 
     total iterations: 567
     mean iterations: 5.67
@@ -160,10 +195,23 @@ Heuristic Repair:
     low moves: 10
 
 Heuristic Repair:
-  Restart at local max:
+  Description: (Restart at local max)(Move 1 queen)
+
+Heuristic Repair:
+  Description (Restart after 'size' times)(Move 2 queens & Check each move)
+    total iterations: 597
+    mean iterations: 5.97
+    high iterations: 21
+    low iterations: 1
+
+    total moves: 14252
+    mean moves: 142.52
+    high moves: 503
+    low moves: 23
+
 
 Forward Checking:
-  Description: Backtracking and Forward
+  Description: (Backtracking and Forward)
 
     total iterations: 98,200
     mean iterations: 982.0
@@ -174,6 +222,110 @@ Forward Checking:
     mean moves: 219.0
     high moves: 219
     low moves: 219
+
+====================================================
+BOARD OF 14
+
+SUMMARY (mean iterations):
+1. Heuristic Repair (after 'size' times)(2):20.52
+2. Heuristic Repair (after 'size' and local)(1): 23.53
+3. Heuristic Repair (after 'size')(1): 24.36
+4. Heuristic Repair (after 10)(1): 35.84
+5. Heuristic Repair (after 10 and local)(1):38.66
+6. Forward Checking: 28381
+7. Heuristic Repair (local)(1):
+
+SUMMARY (mean moves):
+1. Heuristic Repair (after 'size' and local)(1): 653.59
+2. Heuristic Repair (after 'size')(1): 682.08
+3. Heuristic Repair (after 10)(1): 860.16
+4. Heuristic Repair (after 'size' times)(2): 861.07
+5. Heuristic Repair (after 10 and local)(1): 925.77
+6. Forward Checking: 3785
+7. Heuristic Repair (after local)(1):
+
+Heuristic Repair:
+  Description: (Restart after 'size' times)(Move 1 queen)
+    total iterations: 2436
+    mean iterations: 24.36
+    high iterations: 96
+    low iterations: 1
+
+    total moves: 68208
+    mean moves: 682.08
+    high moves: 2688
+    low moves: 28
+
+
+Heuristic Repair:
+  Description: (Restart after 'size' times | Restart at local max)(Move 1 queen)
+
+    total iterations: 2353
+    mean iterations: 23.53
+    high iterations: 135
+    low iterations: 1
+
+    total moves: 65359
+    mean moves: 653.59
+    high moves: 3774
+    low moves: 21
+
+
+
+Heuristic Repair:
+  Description: (Restart after 10 times)(Move 1 queen)
+    total iterations: 3584
+    mean iterations: 35.84
+    high iterations: 140
+    low iterations: 1
+
+    total moves: 86016
+    mean moves: 860.16
+    high moves: 3360
+    low moves: 24
+
+
+Heuristic Repair:
+  Description: (Restart after '10' times | Restart at local max)(Move 1 queen)
+    total iterations: 3866
+    mean iterations: 38.66
+    high iterations: 202
+    low iterations: 1
+
+    total moves: 92577
+    mean moves: 925.77
+    high moves: 4848
+    low moves: 22
+
+Heuristic Repair:
+  Description: (Restart at local max)(Move 1 queen)
+
+Heuristic Repair:
+  Description (Restart after 'size' times)(Move 2 queens & Check each move)
+    total iterations: 2052
+    mean iterations: 20.52
+    high iterations: 83
+    low iterations: 1
+
+    total moves: 86107
+    mean moves: 861.07
+    high moves: 3486
+    low moves: 41
+
+
+Forward Checking:
+  Description: (Backtracking and Forward)
+    total iterations: 2838100
+    mean iterations: 28381.0
+    high iterations: 28381
+    low iterations: 28381
+
+    total moves: 378500
+    mean moves: 3785.0
+    high moves: 3785
+    low moves: 3785
+
+
 
 ====================================================
 BOARD OF 100 (don't run 100 times tho, make more reasonable, both stochastic and forward should work)
