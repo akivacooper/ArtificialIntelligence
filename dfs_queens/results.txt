@@ -1,3 +1,12 @@
+Instructions:
+1. My results are split into 3 sections, each section corresponding to a board size
+2. Each section contains two parts. The 'SUMMARY' and the extensive 'results' section.
+3. In the SUMMARY section, each line contains three parts:
+    a. The part not covered by parenthasis is the name of the algorithm
+    b. The first parenthasis is the number of iteration before the 'board is thrown up'
+    c. The second parenthasis describees how many queens are moved on each iteration
+4. In the 'results' each algorithm has its own little section.
+
 ====================================================
 BOARD OF 4
 
@@ -227,6 +236,7 @@ Forward Checking:
 BOARD OF 14
 
 SUMMARY (mean iterations):
+1. Heuristic Repair (after 'size' times)(size/3): 14.49
 1. Heuristic Repair (after 'size' times)(2):20.52
 2. Heuristic Repair (after 'size' and local)(1): 23.53
 3. Heuristic Repair (after 'size')(1): 24.36
@@ -241,6 +251,7 @@ SUMMARY (mean moves):
 3. Heuristic Repair (after 10)(1): 860.16
 4. Heuristic Repair (after 'size' times)(2): 861.07
 5. Heuristic Repair (after 10 and local)(1): 925.77
+6. Heuristic Repair (after 'size' times)(size/3): 1010.84
 6. Forward Checking: 3785
 7. Heuristic Repair (after local)(1):
 
@@ -325,6 +336,17 @@ Forward Checking:
     high moves: 3785
     low moves: 3785
 
+Heuristic Repair:
+  Description: (Restart after 'size' times)(Move 'size'/3 queens)
+    total iterations: 1449
+    mean iterations: 14.49
+    high iterations: 60
+    low iterations: 1
+
+    total moves: 101084
+    mean moves: 1010.84
+    high moves: 4195
+    low moves: 63
 
 
 ====================================================
