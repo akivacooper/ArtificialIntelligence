@@ -606,7 +606,7 @@ print_board(board)
 game_over = False
 
 while not game_over:
-    if turn % 2 == 1:
+    if turn % 2 == 0:
         col = int(input("RED please choose a column(1-7): "))
         while col > 7 or col < 1:
             col = int(input("Invalid column, pick a valid one: "))
@@ -617,7 +617,7 @@ while not game_over:
         row = get_next_open_row(board, col)
         drop_chip(board, row, col, RED_INT)
 
-    if turn % 2 == 0 and not game_over:
+    if turn % 2 == 1 and not game_over:
         # MoveRandom(board, BLUE_INT)
         move_min_max(board, True, 0, 4, float('inf'))
 
