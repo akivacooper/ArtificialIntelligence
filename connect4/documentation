@@ -5,10 +5,21 @@ the code contains five sections (inspired by the professor code)
 4. heuristic functions
 5. main execution of the game
 
-The main execution has the computer make moves, calling one of the move functions.
-Depending on the implementation of the move function, it may use some (1) heuristic functions and (2) helper functions to make the move
-The heuristic functions themselves use helper functions in determining state values.
+General Flow
+1. The main execution has the computer makes moves, calling one of the move functions.
+2. Depending on the implementation of the move function, it may use some (1) heuristic functions and (2) helper functions to make the move
+3. The heuristic functions themselves use helper functions in determining state values.
 
+My Implementation Flow
+1. The main iterates between player moves, and computer moves
+2. The computer takes the state, after the player makes a move, and calls the move_min_max function
+3. The move min_max_function makes a play for the computer, by traversing the state space tree (see below), and calling helper functions
+4. At the base case (when the horizon has been met) it calls a heurstic function
+5. The heuristic function calls a helper function with the name get_viable_formations (see documention there)
+6. The heuristic function then takes the difference (see below) and returns
+7. The min_max_function then chooses the proper state (see below)
+
+Abstract Formulation
 1.  My specific implementation is an min-max, alpha-beta algorithm
 2.  That means exactly what we discussed in the lecture.
 3.  Namely, in order for a computer to determine its best move, it does a search on every possible state
