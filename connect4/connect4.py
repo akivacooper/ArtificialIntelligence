@@ -87,7 +87,6 @@ returns the longest sequence of a color in the board
 doesn't count sequences that are impossible for wins
 """
 
-
 def get_longest_group(board, chip):
 
     total_chips_in_sets = 0
