@@ -547,16 +547,24 @@ def move_min_max(board, computer_turn, horizon_count, horizon_limit, num_to_beat
 
         max_found = -float('inf')
         max_col = 0
+        lowest_row = -1
 
         for next_col in valid_cols:
 
             new_board = numpy.copy(board)
-            drop_chip(new_board, get_next_open_row(new_board, next_col), next_col, BLUE_INT)
+            next_row = get_next_open_row(new_board, next_col)
+            drop_chip(new_board, next_row, next_col, BLUE_INT)
             next_value = move_min_max(new_board, not computer_turn, horizon_count + 1, horizon_limit, max_found)
 
             if next_value >= max_found:
-                max_found = next_value
-                max_col = next_col
+                if next_value > max_found:
+                    max_found = next_value
+                    max_col = next_col
+                    lowest_row = next_row
+                if next_value == max_found:
+                    if next_row > lowest_row:
+                        max_col = next_col
+                        lowest_row = next_row
 
             if next_value >= num_to_beat:
                 break
@@ -569,16 +577,24 @@ def move_min_max(board, computer_turn, horizon_count, horizon_limit, num_to_beat
 
         min_found = float('inf')
         min_col = 0
+        lowest_row = -1
 
         for next_col in valid_cols:
 
             new_board = numpy.copy(board)
-            drop_chip(new_board, get_next_open_row(new_board, next_col), next_col, RED_INT)
+            next_row = get_next_open_row(new_board, next_col)
+            drop_chip(new_board, next_row, next_col, RED_INT)
             next_value = move_min_max(new_board, not computer_turn, horizon_count + 1, horizon_limit, min_found)
 
             if next_value <= min_found:
-                min_found = next_value
-                min_col = next_col
+                if next_value < min_found:
+                    min_found = next_value
+                    min_col = next_col
+                    lowest_row = next_row
+                if next_value == min_found:
+                    if next_row > lowest_row:
+                        min_col = next_col
+                        lowest_row = next_row
 
             if next_value <= num_to_beat:
                 break
@@ -612,19 +628,24 @@ game_over = False
 
 while not game_over:
     if turn % 2 == 0:
-        col = int(input("RED please choose a column(1-7): "))
-        while col > 7 or col < 1:
-            col = int(input("Invalid column, pick a valid one: "))
-        while not is_valid_location(board, col - 1):
-            col = int(input("Column is full. pick another one..."))
-        col -= 1
+        # col = int(input("RED please choose a column(1-7): "))
+        # while col > 7 or col < 1:
+        #     col = int(input("Invalid column, pick a valid one: "))
+        # while not is_valid_location(board, col - 1):
+        #     col = int(input("Column is full. pick another one..."))
+        # col -= 1
+        #
+        # row = get_next_open_row(board, col)
+        # drop_chip(board, row, col, RED_INT)
 
-        row = get_next_open_row(board, col)
-        drop_chip(board, row, col, RED_INT)
+        # MoveRandom(board, BLUE_INT)
+
+        move_min_max(board, False, 0, 5, -float('inf'))
+
 
     if turn % 2 == 1 and not game_over:
         # MoveRandom(board, BLUE_INT)
-        move_min_max(board, True, 0, 4, float('inf'))
+        move_min_max(board, True, 0, 5, float('inf'))
 
     print_board(board)
 

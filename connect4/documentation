@@ -34,3 +34,15 @@ Abstract Formulation
 12. Instead it prunes the search tree by not looking for states that it wouldn't consider.
 13. Namely, in a min-persepctive (when in the shoes of the player) it ceases to search when it finds a number smaller than something the max (the computer perspective) has already found
 14. And, in the max-perspective it ceases to search when it finds a number larger than something the min has already found
+
+CREATIVITY
+1. I used mini-max with alpha-beta
+2. See my heuristic solution, and the helper function it uses.
+This is creative because it does not count only the sequences, but it counts the viable sequences, and the different forms it could come in
+3. It also protects (and plans for) double traps. That's because it accumulates more than one formation at a time
+4. Why would the agent sometimes lose against a random agent? My agent is too slow (was there a time requirement?) to run against a random agent a substantive amount of times
+But the reason that it would sometimes lose is because it's assuming that the opponent is planning on good moves, and it accomates for that
+This forces its hand sometimes, giving up what otherwise would have been a good move to play defense
+But if the random agent doesn't follow through with good states, it messes up my agent, in turn helping the random agent
+5. I had it play itself. The first player seemed to be in a far better position when the game was up.
+
