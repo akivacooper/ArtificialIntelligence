@@ -5,7 +5,7 @@ import numpy as np
 import random
 from termcolor import colored  # can be taken out if you don't like it...
 
-# # # # # # # # # # # # # # global values  # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # 1. global values  # # # # # # # # # # # # # #
 ROW_COUNT = 6
 COLUMN_COUNT = 7
 
@@ -17,7 +17,7 @@ RED_INT = 1
 BLUE_INT = 2
 
 
-# # # # # # # # # # # # # # functions definitions # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # 2. helper functions # # # # # # # # # # # # # #
 
 def create_board():
     """creat empty board for new game"""
@@ -82,12 +82,14 @@ def get_valid_cols(board):
     return valid_locations
 
 
-"""
-returns the longest sequence of a color in the board
-doesn't count sequences that are impossible for wins
-"""
-
-def get_longest_group(board, chip):
+def get_viable_formations(board, chip):
+    """
+    @param board:
+    @param chip:
+    @return: the number of viable formations a given state has
+    a 'viable formation' is a formation that can be used to win; therefore, all viable formations are four in length, and have either no chips in a given slot, or chips of the correct color
+    the formations are scored by the number of chips it contains
+    """
 
     total_chips_in_sets = 0
 
@@ -117,7 +119,7 @@ def get_longest_group(board, chip):
     # Check horizontal sequences
     for r in range(ROW_COUNT):
         if "".join(list(map(str, four_one))) in "".join(list(map(str, board[r, :]))):
-            #return 4
+            # return 4
             total_chips_in_sets += 4
     # Check vertical sequences
     for c in range(COLUMN_COUNT):
@@ -135,7 +137,6 @@ def get_longest_group(board, chip):
         if "".join(list(map(str, four_one))) in "".join(list(map(str, np.flip(board, 1).diagonal(offset)))):
             # return 4
             total_chips_in_sets += 4
-
 
     ##########################
     # 3
@@ -165,7 +166,6 @@ def get_longest_group(board, chip):
             # return 3
             total_chips_in_sets += 3
 
-
     #########################
 
     # Check horizontal sequences
@@ -191,7 +191,6 @@ def get_longest_group(board, chip):
         if "".join(list(map(str, three_two))) in "".join(list(map(str, np.flip(board, 1).diagonal(offset)))):
             # return 3
             total_chips_in_sets += 3
-
 
     #########################
 
@@ -219,7 +218,6 @@ def get_longest_group(board, chip):
             # return 3
             total_chips_in_sets += 3
 
-
     #########################
 
     # Check horizontal sequences
@@ -245,7 +243,6 @@ def get_longest_group(board, chip):
         if "".join(list(map(str, three_four))) in "".join(list(map(str, np.flip(board, 1).diagonal(offset)))):
             # return 3
             total_chips_in_sets += 3
-
 
     ##########################
     # 2
@@ -275,7 +272,6 @@ def get_longest_group(board, chip):
             # return 2
             total_chips_in_sets += 2
 
-
     #########################
 
     # Check horizontal sequences
@@ -301,7 +297,6 @@ def get_longest_group(board, chip):
         if "".join(list(map(str, two_two))) in "".join(list(map(str, np.flip(board, 1).diagonal(offset)))):
             # return 2
             total_chips_in_sets += 2
-
 
     #########################
 
@@ -329,7 +324,6 @@ def get_longest_group(board, chip):
             # return 2
             total_chips_in_sets += 2
 
-
     #########################
 
     # Check horizontal sequences
@@ -355,7 +349,6 @@ def get_longest_group(board, chip):
         if "".join(list(map(str, two_four))) in "".join(list(map(str, np.flip(board, 1).diagonal(offset)))):
             # return 2
             total_chips_in_sets += 2
-
 
     #########################
 
@@ -383,7 +376,6 @@ def get_longest_group(board, chip):
             # return 2
             total_chips_in_sets += 2
 
-
     #########################
 
     # Check horizontal sequences
@@ -409,7 +401,6 @@ def get_longest_group(board, chip):
         if "".join(list(map(str, two_six))) in "".join(list(map(str, np.flip(board, 1).diagonal(offset)))):
             # return 2
             total_chips_in_sets += 2
-
 
     ##########################
     # 1
@@ -508,6 +499,8 @@ def get_longest_group(board, chip):
 
     return total_chips_in_sets
 
+# # # # # # # # # # # # # # 3. move functions # # # # # # # # # # # # # #
+
 
 def MoveRandom(board, color):
     valid_locations = get_valid_cols(board)
@@ -518,8 +511,21 @@ def MoveRandom(board, color):
 
 
 def move_min_max(board, computer_turn, horizon_count, horizon_limit, num_to_beat):
-    # computer is maximizing score
-    # player is minimizing score
+    '''
+    @param board: 
+    @param computer_turn: boolean
+    @param horizon_count: the given level in the tree
+    @param horizon_limit: at which point the tree no longer grows and the state is assessed
+    @param num_to_beat: alpha or beta, depending on the turn
+    @return: the value of the state after making a move
+
+    computer is maximizing score
+    layer is minimizing score
+
+    this is a generic alpha-beta function tailored to the game, connect4
+    the heuristic used to determine state value can be swapped out in the 3rd if statement
+
+    '''
 
     if game_is_won(board, BLUE_INT):
         return float('inf')
@@ -527,6 +533,7 @@ def move_min_max(board, computer_turn, horizon_count, horizon_limit, num_to_beat
     elif game_is_won(board, RED_INT):
         return -float('inf')
 
+    # if the horizon is reached, the state is assessed based on the following heuristic
     if horizon_count == horizon_limit:
         return in_a_row(board)
 
@@ -581,10 +588,9 @@ def move_min_max(board, computer_turn, horizon_count, horizon_limit, num_to_beat
         return min_found
 
 
-# # # # # # # # # # # # # # heuristics # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # 4. heuristics # # # # # # # # # # # # # #
 
 '''
-making smart moves when all else is equal
 keeping track not only of longest sequence, but how distinct many sequences, like double trap
 keeping track of when there is an empty space in between
 not thinking that if i move somewhere and win, and then it could follow up, that computes to 05
@@ -592,12 +598,12 @@ not thinking that if i move somewhere and win, and then it could follow up, that
 
 
 def in_a_row(board):
-    blue_total = get_longest_group(board, BLUE_INT)
-    red_total = get_longest_group(board, RED_INT)
+    blue_total = get_viable_formations(board, BLUE_INT)
+    red_total = get_viable_formations(board, RED_INT)
     return blue_total - red_total
 
 
-# # # # # # # # # # # # # # main execution of the game # # # # # # # # # # # # # #
+# # # # # # # # # # # # # # 5. main execution of the game # # # # # # # # # # # # # #
 turn = 0
 
 board = create_board()

@@ -1,0 +1,25 @@
+the code contains five sections (inspired by the professor code)
+1. global variables
+2. helper functions
+3. move functions
+4. heuristic functions
+5. main execution of the game
+
+The main execution has the computer make moves, calling one of the move functions.
+Depending on the implementation of the move function, it may use some (1) heuristic functions and (2) helper functions to make the move
+The heuristic functions themselves use helper functions in determining state values.
+
+1.  My specific implementation is an min-max, alpha-beta algorithm
+2.  That means exactly what we discussed in the lecture.
+3.  Namely, in order for a computer to determine its best move, it does a search on every possible state
+4.  It ranks by determining how beneficial it is for the computer, for the player, and taking the difference
+5.  Iterating between its perspective, and its percieved perspective of the player, it chooses states attempting to maximize the given perspective
+6.  It's a type of 'I know that you know.'
+7.  When in the shoes of the player, it looks for states that are as small as possible (and this makes sense because it's the difference of the benefit for the computer and the benefit of the player)
+8.  And when in the shoes of the computer, it looks for states that are as large as possible
+9.  It also It determines the the states by assigning scores based on who--the player or the computer--will be responsible for creating the state
+10. What I said in note 3, is not 100% true.
+11. If it searched every state, it wouldn't be an implementatin of the alpha-beta algorithm
+12. Instead it prunes the search tree by not looking for states that it wouldn't consider.
+13. Namely, in a min-persepctive (when in the shoes of the player) it ceases to search when it finds a number smaller than something the max (the computer perspective) has already found
+14. And, in the max-perspective it ceases to search when it finds a number larger than something the min has already found
