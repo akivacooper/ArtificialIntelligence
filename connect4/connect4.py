@@ -627,23 +627,22 @@ print_board(board)
 game_over = False
 
 while not game_over:
-    if turn % 2 == 0:
-        # col = int(input("RED please choose a column(1-7): "))
-        # while col > 7 or col < 1:
-        #     col = int(input("Invalid column, pick a valid one: "))
-        # while not is_valid_location(board, col - 1):
-        #     col = int(input("Column is full. pick another one..."))
-        # col -= 1
-        #
-        # row = get_next_open_row(board, col)
-        # drop_chip(board, row, col, RED_INT)
+    if turn % 2 == 1:
+        col = int(input("RED please choose a column(1-7): "))
+        while col > 7 or col < 1:
+            col = int(input("Invalid column, pick a valid one: "))
+        while not is_valid_location(board, col - 1):
+            col = int(input("Column is full. pick another one..."))
+        col -= 1
+
+        row = get_next_open_row(board, col)
+        drop_chip(board, row, col, RED_INT)
 
         # MoveRandom(board, BLUE_INT)
+        #move_min_max(board, False, 0, 5, -float('inf'))
 
-        move_min_max(board, False, 0, 5, -float('inf'))
 
-
-    if turn % 2 == 1 and not game_over:
+    if turn % 2 == 0 and not game_over:
         # MoveRandom(board, BLUE_INT)
         move_min_max(board, True, 0, 5, float('inf'))
 

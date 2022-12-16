@@ -1,0 +1,25 @@
+See connect4.py in the connect4MC directory. It contains code for an elementary implementation of a Monte Carlo agent.
+The agent can play connect4.
+
+The code relies heavily on the starter code for assignment 3. It introduce a new method, called MoveMC. This method replaces the
+MoveRandom method in the starter code. (See the imperative section at the bottom of the document to see where MoveRandom has been replaced
+with MoveMC.) While the Monte Carlo logic was written by myself, the logic uses the starter code for assignment 3 in a similar
+way programmers use inported libraries. For example, the logic calls to methods already written in the start code for project 3.
+(Think methods like: game_is_won, and MoveRandom).
+
+
+Psuedo Code:
+MoveMC makes a move in a given board. Note, that the method is written assuming it will be used only for the agent's moves.
+It assesses the board, using an elementary Monte Carlo algorithm, and makes what it believes is the best move.
+
+This is how the agent decides how to make its next move
+ 1. It creates a mirror-board of the board passed in as a parameter
+ 2. For each available column in the mirror-board:
+    a. it places a chip
+    b. it then simulates the remainder of the game 100 times as follows:
+        -it simulates the opponents move in this mirror-board, by placing an opponent chip randomly
+        -it then simulates its own move in this mirror-board, by placing its own chip randomly
+        -it continues to simulate random moves until the game has ended
+ 3. the agent places its chip in the column of the 'actual' board in which it won the most simulated games.
+
+
